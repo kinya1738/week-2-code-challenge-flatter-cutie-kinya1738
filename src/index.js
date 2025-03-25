@@ -31,16 +31,20 @@ document.addEventListener("DOMContentLoaded", () => {
         .catch(err => console.log(err));
 
     
-    form.onsubmit = (e) => {
-        e.preventDefault();
-        let votes = document.getElementById("votes").value;
-        if (votes) {
-            voteCount.textContent = Number(voteCount.textContent) + Number(votes);
-        }
-        form.reset();
-    };
+        let voteData = { count: 0 };
 
-   
-    resetBtn.onclick = () => voteCount.textContent = 0;
+form.onsubmit = (e) => {
+    e.preventDefault();
+    voteData.count += Number(document.getElementById("votes").value);
+    voteCount.textContent = voteData.count;
+    form.reset();
+};
+
+resetBtn.onclick = () => {
+    voteData.count = 0;
+    voteCount.textContent = voteData.count;
+};
+
+            
 });
 
